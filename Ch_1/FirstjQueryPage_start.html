@@ -5,14 +5,25 @@
     <title>First jQuery-Enabled Page</title>
     <link rel="stylesheet" href="../style.css" />
 
-    <!-- insert the script to reference jQuery here -->
+    <script type="text/javascript" src="../jquery-3.1.1.js"></script>
+    <script>
+        $( document ).ready(function() {                                             // .ready to event // wewnątrz callback jako event handler
+            $("#content").append("<p>This is a paragraph made in jQuery</p>");       // jQuery. // chcę modyfikować tag id=content //append- dodaje tag
+        });
 
-    <!-- insert the script to display the Hello World message here -->
+        //to samo w js
+        window.onload = (function () {
+            var mydiv = document.getElementById("content");
+            var mycontent = document.createElement("p");
+            mycontent.appendChild(document.createTextNode("This is a paragraph made in js not jq"));
+            mydiv.appendChild(mycontent);
+        })
+    </script>
 </head>
 
 <body>
     <h1>First jQuery Page</h1>
-    <div id="content">
+    <div id="content">ddd
         <!-- we start with an empty document -->
     </div>
 </body>
