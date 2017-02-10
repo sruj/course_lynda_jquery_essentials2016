@@ -13,6 +13,43 @@
       $("section#products h2[data-type=proteinbar]").css("backgroundColor", "black");
     });
   </script>
+  <script>
+    $(document).ready(function(){
+      $("input#vit").change(function(){
+        if($('#vit').prop('checked')) {
+          $(function() {
+            $("h2[data-type='vitamin']").parent().show();
+          });}
+        else {
+          $(function() {
+            $("h2[data-type='vitamin']").parent().hide();
+          });
+        }
+      });
+      $("input#wat").change(function(){
+        if($('#wat').prop('checked')) {
+          $(function() {
+            $("h2[data-type='mineralwater']").parent().show();
+          });}
+        else {
+          $(function() {
+            $("h2[data-type='mineralwater']").parent().hide();
+          });
+        }
+      });
+      $("input#pro").change(function(){
+        if($('#pro').prop('checked')) {
+          $(function() {
+            $("h2[data-type='proteinbar']").parent().show();
+          });}
+        else {
+          $(function() {
+            $("h2[data-type='proteinbar']").parent().hide();
+          });
+        }
+      });
+    });
+  </script>
 </head>
 <body>
 
@@ -54,6 +91,17 @@
     <h2 class="headline">Products</h2>
     <p>H+ Sport is <em>dedicated to creating</em> eco-friendly, high-quality, nutrient-rich, nutritional products that <em>enhance active lifestyles</em>. We <a href="#guarantee">guarantee</a> it. Take a look at some of our products.</p>
   </div><!-- container -->
+  <div>
+    <form>
+      Show:
+      <input type="checkbox" id="vit" checked="checked">
+      Vitamins
+      <input type="checkbox" id="wat" checked="checked">
+      Mineral Water
+      <input type="checkbox" id="pro" checked="checked">
+      Protein Bars
+    </form>
+  </div>
   <ul class="product-list">
     <li class="product-item" data-prod_id="V-A1037">
         <img class="product-image" src="images/products/vitamin-a.jpg" alt="Vitamin A - Product Photo">
