@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="../jquery-3.1.1.js"></script>
+
   <script>
     $(function() {
       $("section#products h2[data-type='vitamin']").css("background-color", "#3333dd");
@@ -13,6 +14,7 @@
       $("section#products h2[data-type=proteinbar]").css("backgroundColor", "black");
     });
   </script>
+
   <script>
     $(document).ready(function(){
       $("input#vit").change(function(){
@@ -50,6 +52,20 @@
       });
     });
   </script>
+
+  <script>
+    $(function () {
+      $("ul.product-list li.product-item").each(function (element) {
+        var url="product.html";
+        var prodName = encodeURI($(this).children("h2").text());
+        var prodID = $(this).data("prod_id");
+        $(this).children("img").wrap("<a href=" + url + "?prodName="+ prodName +"&prodID="+ prodID +"></a>");
+      })
+
+    });
+
+  </script>
+
 </head>
 <body>
 
