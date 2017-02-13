@@ -7,43 +7,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../jquery-3.1.1.js"></script>
     <script>
-        $(function() {
-            // extract the query string parameters
-            var paramLoc = window.location.href.indexOf("?");
-            var paramStr = window.location.href.slice(paramLoc+1);
-            var prodName = "";
-            var prodID = "";
-            var i = paramStr.indexOf("prodName=")+9;
-            for (var j = i; j < paramStr.length; j++) {
-                if (paramStr.charAt(j) == "&")
-                    break;
-                prodName += paramStr.charAt(j);
+        $.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results==null){
+                return null;
             }
-            var i = paramStr.indexOf("prodID=")+7;
-            for (var j = i; j < paramStr.length; j++) {
-                if (paramStr.charAt(j) == "&")
-                    break;
-                prodID += paramStr.charAt(j);
+            else{
+                return results[1] || 0;
             }
-            prodName = decodeURIComponent(prodName);
-            prodID = decodeURIComponent(prodID);
+        };
 
-            // set the product name in the proper placeholder
-            $("#productName").text(prodName);
 
-            // retrieve the product information via AJAX
-            $.getJSON("product-data.json")
-                    .done(function(prodData) {
-                        // use the prodID to get this product information
-                        prodData.products.forEach(function(elem) {
-                            if (elem.prod_id == prodID) {
-                                $("#productStock").text(elem.in_stock);
-                                $("#productPrice").text(elem.retail_price);
-                                $("#productDesc").text(elem.description);
-                            }
-                        });
-                    });
-        })
+
+        $.getJSON( "product-data.json", function( data ) { //data ma zawartosc json
+            var prodID = $.urlParam('prodID');
+
+            $.each( data.products, function( key, val ) {
+                if(val.prod_id==prodID){
+                    $("#productName").text(val.prod_name);
+                    $("#productStock").text(val.in_stock);
+                    $("#productPrice").text(val.retail_price);
+                    $("#productDesc").text(val.description);
+                }
+            });
+        });
+
     </script>
 </head>
 <body>
